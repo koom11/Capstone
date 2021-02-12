@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h1>Welcome, {{user.username}}</h1>
+
+<form class="d-flex">
+    <h3>Which Medicine are you looking for?</h3>
+    <hr>
+    <input class="form-control me-2" type="search" placeholder="Search Medicine" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+
+<!-- <table class="table table-sm table-striped">
+        <tr>
+            <th>Drug Name</th>
+            <th>Price</th>
+        </tr>
+        {% for drug in drugs %}
+        <tr>
+            <td>{{drug.name}}</td>
+            <td>${{drug.price}}0</td>
+        </tr>
+        {% endfor %}
+    </table> -->
+
+
+{% endblock %}
