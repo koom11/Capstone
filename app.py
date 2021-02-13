@@ -38,6 +38,13 @@ def register_user():
         last_name = form.last_name.data
         user = User.register(username, password, email, first_name, last_name)
 
+        # Handle Duplicate Username
+        user_obj = User.query.filter_by(username=username).first()
+        if user_obj:
+            form.username.errors = [
+                f'username "{username}" already exists. Please choose another.']
+            return render_template('/register.html', form=form)
+
         db.session.add(user)
         db.session.commit()
 
@@ -81,8 +88,10 @@ def show_user_home(username):
     if "username" not in session or username != session['username']:
         raise Unauthorized()
 
-    drugs = Drug.query.all()
+    drug_name = Drug.query.get(drug_name)
     user = User.query.get(username)
     form = DeleteForm()
 
-    return render_template('/home.html', user=user, form=form, drugs=drugs)
+    drug_obj = Drug.query.filter_by(drug_name=drug_name)
+
+    return render_template('/home.html', user=user, form=form, drug=drug)
