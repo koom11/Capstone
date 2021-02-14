@@ -94,4 +94,4 @@ def show_user_home(username):
 
     drug_obj = Drug.query.filter_by(drug_name=drug_name)
 
-    return render_template('/home.html', user=user, form=form, drug=drug)
+    return render_template('/home.html', user=user, form=form, drug=drug_name)
