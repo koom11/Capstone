@@ -232,3 +232,5 @@ const TOP_200_DRUGS = [
 	'Mevacor',
 	'Altoprev'
 ];
+
+const pharmacies = [ 'CVS', 'Walgreens', 'Walmart', 'Wegmans' ];

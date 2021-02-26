@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, render_template, redirect, session
-from forms import UserForm, LoginForm, DeleteForm
-from models import db, connect_db, Drug, User, Pharmacy, Price
+
+from models import db, connect_db, Drug,  Pharmacy, Price
 from flask_debugtoolbar import DebugToolbarExtension
 
 app = Flask(__name__)
@@ -21,9 +21,9 @@ def show_home():
     return redirect('/register')
 
 
-@app.route('/register', methods=['GET', 'POST'])
+""" @app.route('/register', methods=['GET', 'POST'])
 def register_user():
-    """Register new user"""
+    
 
     if "username" in session:
         return redirect(f'/{session["username"]}')
@@ -57,7 +57,7 @@ def register_user():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login_user():
-    """Show Login Form and handle user login"""
+    
     form = LoginForm()
 
     if form.validate_on_submit():
@@ -88,10 +88,15 @@ def show_user_home(username):
     if "username" not in session or username != session['username']:
         raise Unauthorized()
 
-    drug_name = Drug.query.get(drug_name)
     user = User.query.get(username)
     form = DeleteForm()
 
-    drug_obj = Drug.query.filter_by(drug_name=drug_name)
+    #drug_obj = Price.query.filter_by(drug_name=drug_name)
 
-    return render_template('/home.html', user=user, form=form, drug=drug_name)
+    return render_template('/home.html', user=user, form=form) """
+
+
+@app.route('/drugs/<int:id>', methods=['GET'])
+def get_drug(id):
+    drug = Drug.query.get_or_404(id)
+    return jsonify(drug=drug.serialize())
